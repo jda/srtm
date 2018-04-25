@@ -14,4 +14,5 @@ func TestReadFile(t *testing.T) {
 	if err != nil {
 		t.Errorf("failed to process %s: %s", tFileName, err)
 	}
+
 }

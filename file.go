@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"io"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -13,6 +14,11 @@ import (
 // ErrInvalidHGTFileName is returned when a HGT file name does not match
 // pattern of a valid file which indicates lat/lon
 var ErrInvalidHGTFileName = errors.New("invalid HGT file name")
+
+// should this be option to support non-30m data?
+const squareSize = 3601 // 30m SRTM data is 3601 squares tall/wide
+
+var srtmParseName = regexp.MustCompile(`(N|S)(\d\d)(E|W)(\d\d\d)\.hgt(\.gz)?`)
 
 // ReadFile is a helper func around Read that reads a SRTM file, decompressing
 // if necessary, and returns  SRTM elevation data
