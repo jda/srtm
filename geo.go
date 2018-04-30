@@ -15,13 +15,6 @@ var latitudeDD = regexp.MustCompile(`N|S`)
 // unparsable or otherwise invalid
 var ErrInvalidCoordDegrees = errors.New("invalid lat/lon degrees")
 
-// Point represents a location with height in meters
-type Point struct {
-	Latitude  float64
-	Longitude float64
-	Elevation int16 // Elevation in meters
-}
-
 // dToDecimal accepts a direction-signed coordinate value (e.g. W|E or N|S prefix)
 // and returns a positive or negative number instead
 func dToDecimal(d string) (dd float64, err error) {
