@@ -104,3 +104,16 @@ func GetFileCorner(file string) (p geo.Point, err error) {
 
 	return p, err
 }
+
+// IsHGT returns true if fname appears to be a SRTM HGT file
+func IsHGT(fname string) bool {
+	if strings.HasSuffix(fname, ".hgt") {
+		return true
+	}
+
+	if strings.HasSuffix(fname, ".hgt.gz") {
+		return true
+	}
+
+	return false
+}
