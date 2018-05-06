@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"github.com/jda/skyline/geo"
-
 	"github.com/pkg/errors"
 )
 
@@ -24,7 +23,7 @@ var srtmParseName = regexp.MustCompile(`(N|S)(\d\d)(E|W)(\d\d\d)\.hgt(\.gz)?`)
 
 // ReadFile is a helper func around Read that reads a SRTM file, decompressing
 // if necessary, and returns  SRTM elevation data
-func ReadFile(file string) (points []geo.Point, err error) {
+func ReadFile(file string) (points []Point, err error) {
 	f, err := os.Open(file)
 	if err != nil {
 		return points, err
@@ -45,13 +44,13 @@ func ReadFile(file string) (points []geo.Point, err error) {
 }
 
 // Read reads elevation for points from a SRTM file
-func Read(fname string, r io.Reader) (points []geo.Point, err error) {
+func Read(fname string, r io.Reader) (points []Point, err error) {
 	swCorner, err := GetFileCorner(fname)
 	if err != nil {
 		return points, errors.Wrap(err, "could not get corner coordinates from file name")
 	}
 
-	points = make([]geo.Point, squareSize*squareSize)
+	points = make([]Point, squareSize*squareSize)
 	pIdx := 0
 
 	// Latitude
@@ -68,7 +67,7 @@ func Read(fname string, r io.Reader) (points []geo.Point, err error) {
 				return points, errors.Wrapf(err, "EOF before %d?", squareSize)
 			}
 
-			points[pIdx] = geo.Point{
+			points[pIdx] = Point{
 				Latitude:  lat,
 				Longitude: lon,
 				Elevation: elev,
