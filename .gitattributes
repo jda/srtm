@@ -1,0 +1,2 @@
+*.hgt filter=lfs diff=lfs merge=lfs -text
+*.hgt.gz filter=lfs diff=lfs merge=lfs -text
