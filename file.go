@@ -8,7 +8,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/jda/skyline/geo"
 	"github.com/pkg/errors"
 )
 
@@ -81,7 +80,7 @@ func Read(fname string, r io.Reader) (points []Point, err error) {
 
 // GetFileCorner returns the southwest point contained in a HGT file.
 // Coordinates in the file are relative to this point
-func GetFileCorner(file string) (p geo.Point, err error) {
+func GetFileCorner(file string) (p Point, err error) {
 	fnameParts := srtmParseName.FindStringSubmatch(file)
 	if fnameParts == nil {
 		return p, ErrInvalidHGTFileName
@@ -96,7 +95,7 @@ func GetFileCorner(file string) (p geo.Point, err error) {
 		return p, errors.Wrap(err, "could not get Longitude from file name")
 	}
 
-	p = geo.Point{
+	p = Point{
 		Latitude:  swLatitude,
 		Longitude: swLongitude,
 	}
